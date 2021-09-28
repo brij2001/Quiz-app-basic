@@ -12,3 +12,8 @@
 .positioning{
     margin-left:50px;
 }
+
+.middle{
+    width:20% !important;
+    text-align:center;
+}

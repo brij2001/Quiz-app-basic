@@ -25,15 +25,26 @@ namespace Quiz_Project
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
-                Label4.Text = "Login Sucess......!!";
+                sdr.Close();
+                string sqlquery = "select * from studentLogin";
+                SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+                SqlDataAdapter sdr2 = new SqlDataAdapter(sqlcomm);
+                DataTable dt = new DataTable();
+                sdr2.Fill(dt);
+                Repeater1.DataSource = dt;
+                Repeater1.DataBind();
+                sqlconn.Close();
+                Repeater1.Visible = true;
             }
             else
             {
                 Label4.Text = "UserId & Password Is not correct Try again..!!";
+                Label4.Visible = true;
+                sqlconn.Close();
 
             }
-            Label4.Visible = true;
-            sqlconn.Close();
+            
+            
         }
 
     }

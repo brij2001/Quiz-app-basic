@@ -57,7 +57,7 @@
                 
             </tr>  
             <tr>  
-                <td> </td>  
+                <td><asp:LinkButton  class="positioning btn btn-secondary" ID="LinkButton1" runat="server" PostBackUrl="adminLogin.aspx">Admin Login</asp:LinkButton></td>  
                 <td style="text-align: center" class="auto-style4">  
                     <asp:Button ID="Button1" runat="server" BorderStyle="None" Font-Size="X-Large" OnClick="Button1_Click" Text="Log In" />  
                 </td>  

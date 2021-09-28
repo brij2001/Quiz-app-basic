@@ -31,7 +31,7 @@
         <table class="auto-style1">  
             <tr>  
                 <td colspan="2" style="text-align: center; vertical-align: top">  
-                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" Font-Underline="True" Text="Log In "></asp:Label>  
+                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" Font-Underline="True" Text="Admin Log In "></asp:Label>  
                 </td>  
                 <td style="text-align: center; vertical-align: top">  
                     &nbsp;</td>  
@@ -80,6 +80,15 @@
         </table>  
       
     </div> </center> 
-    </form>  
+    <center><table class="middle table table-success table-striped">
+                <tr><th>Student Name</th><th>Score</th></tr>
+        <asp:Repeater ID="Repeater1" runat="server" Visible="false"><ItemTemplate>
+            
+                <tr><td><%#Eval("UserId")%></td><td><%#Eval("score")%></td></tr>
+            
+        </ItemTemplate>
+            </asp:Repeater>
+        </table><asp:LinkButton  class="positioning btn btn-secondary" ID="LinkButton1" runat="server" PostBackUrl="studentLogin.aspx">Student Login</asp:LinkButton>
+            </form> </center> 
 </body>  
 </html>

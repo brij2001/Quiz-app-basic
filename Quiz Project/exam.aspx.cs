@@ -132,8 +132,9 @@ namespace Quiz_Project
             System.Diagnostics.Debug.WriteLine(query);
             sqlconn.Open();
             cmd.ExecuteNonQuery();
+            Response.Cookies["studentname"].Expires = DateTime.Now.AddDays(-1);
             Label1.Visible = true;
-            Label1.Text = "your score is " + score + ".";
+            Label1.Text = "Your score is " + score + ".";
         }
 
     }

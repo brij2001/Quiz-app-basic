@@ -40,10 +40,11 @@
                        </div> </table>
                     </ItemTemplate>
                 </asp:Repeater>
-                <asp:Button class="positioning" ID="submit_btn" runat="server" Text="Submit" OnClick="submit_btn_Click" BackColor="#009900" />
+                <br /><br /><asp:Button class="positioning btn btn-successs" ID="submit_btn" runat="server" Text="Submit" OnClick="submit_btn_Click" BackColor="#009900" />
 
-                <br />
-                <asp:Label class="positioning" ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>            
+                <br /><p class="fw-normal">
+                <asp:Label class="positioning" ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>   </p>
+            <asp:LinkButton  class="positioning btn btn-secondary" ID="LinkButton1" runat="server" PostBackUrl="studentLogin.aspx">New Test</asp:LinkButton>
         </div>
     </form>
 </body>
