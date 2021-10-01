@@ -80,15 +80,22 @@
         </table>  
       
     </div> </center> 
-    <center><table class="middle table table-success table-striped">
-                <tr><th>Student Name</th><th>Score</th></tr>
-        <asp:Repeater ID="Repeater1" runat="server" Visible="false"><ItemTemplate>
-            
-                <tr><td><%#Eval("UserId")%></td><td><%#Eval("score")%></td></tr>
-            
-        </ItemTemplate>
-            </asp:Repeater>
-        </table><asp:LinkButton  class="positioning btn btn-secondary" ID="LinkButton1" runat="server" PostBackUrl="studentLogin.aspx">Student Login</asp:LinkButton>
-            </form> </center> 
+    
+        <br />
+  <center>
+        <asp:LinkButton  visible="false" class="positioning btn btn-secondary" ID="LinkButton2" runat="server" OnClick="LinkButton2_Click">Show Student Score</asp:LinkButton>
+        
+        <br />
+        <asp:GridView  class="positioning middle table table-success table-striped" Visible="false" ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="UserId" DataSourceID="datasrc1">
+            <Columns>
+                <asp:BoundField DataField="UserId" HeaderText="UserId" ReadOnly="True" SortExpression="UserId" />
+                <asp:BoundField DataField="score" HeaderText="score" SortExpression="score" />
+            </Columns>
+        </asp:GridView>
+
+        
+        <asp:SqlDataSource ID="datasrc1" runat="server" ConnectionString="<%$ ConnectionStrings:myconn %>" SelectCommand="SELECT [UserId], [score] FROM [studentLogin] ORDER BY [UserId]"></asp:SqlDataSource>
+       <br /><br /><asp:LinkButton  class="positioning btn btn-secondary" ID="LinkButton1" runat="server" PostBackUrl="studentLogin.aspx">Student Login</asp:LinkButton>
+            </center></form>  
 </body>  
 </html>
