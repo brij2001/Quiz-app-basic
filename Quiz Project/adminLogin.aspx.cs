@@ -9,13 +9,12 @@ namespace Quiz_Project
 {
     public partial class adminLogin : System.Web.UI.Page
     {
-        string mainconn = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-        
+        private string mainconn = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
+
         private void bindrepeater()
         {
             SqlConnection sqlconn = new SqlConnection(mainconn);
@@ -29,6 +28,7 @@ namespace Quiz_Project
             Repeater1.DataBind();
             sqlconn.Close();
         }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
             SqlConnection sqlconn = new SqlConnection(mainconn);
@@ -41,6 +41,7 @@ namespace Quiz_Project
             if (sdr.Read())
             {
                 Label4.Visible = false;
+                loginPanel.Visible = false;
                 sdr.Close();
                 LinkButton2.Visible = true;
                 LinkButton3.Visible = true;
@@ -50,10 +51,7 @@ namespace Quiz_Project
                 Label4.Text = "UserId & Password Is not correct Try again..!!";
                 Label4.Visible = true;
                 sqlconn.Close();
-
             }
-            
-            
         }
 
         protected void LinkButton2_Click(object sender, EventArgs e)
@@ -63,10 +61,12 @@ namespace Quiz_Project
                 Repeater1.Visible = false;
                 GridView1.Visible = true;
                 LinkButton2.Text = "Hide Student Score";
+                LinkButton3.Text = "Edit Questions";
+                removebutton.Visible = false;
             }
             else
             {
-                GridView1.Visible = false;                
+                GridView1.Visible = false;
                 LinkButton2.Text = "Show Student Score";
             }
         }
@@ -76,20 +76,23 @@ namespace Quiz_Project
             if (Repeater1.Visible == false)
             {
                 GridView1.Visible = false;
-
+                
                 this.bindrepeater();
                 Repeater1.Visible = true;
                 LinkButton3.Text = "Hide Questions";
-                System.Diagnostics.Debug.WriteLine("table visible");
+                LinkButton2.Text = "Show Student Score";
+                removebutton.Visible = true;
             }
             else
             {
+                removebutton.Visible = false;
                 Repeater1.Visible = false;
                 LinkButton3.Text = "Edit Questions";
             }
         }
+
         public static void MessageBox(System.Web.UI.Page page, string strMsg)
-        {           
+        {
             ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "alert('" + strMsg + "')", true);
         }
 
@@ -100,7 +103,6 @@ namespace Quiz_Project
             sqlconn.Open();
             if (e.CommandName == "update")
             {
-                
                 string editId = btnEdit.CommandArgument;
                 string qids = ((Label)e.Item.FindControl("Label5")).Text;
                 string qs = ((TextBox)e.Item.FindControl("TextBoxqs")).Text;
@@ -124,18 +126,19 @@ namespace Quiz_Project
                 cmd.ExecuteNonQuery();
                 sqlconn.Close();
                 MessageBox(this, "Question Updated!");
+                this.bindrepeater();
             }
             if (e.CommandName == "insert")
             {
                 SqlCommand cmd = sqlconn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText="insert into exam (question, op1,op2,op3,op4,correct) values ('question','op1','op2','op3','op4','correct answer')";
+                cmd.CommandText = "insert into exam (question, op1,op2,op3,op4,correct) values ('question','op1','op2','op3','op4','correct answer')";
                 cmd.ExecuteNonQuery();
                 sqlconn.Close();
                 MessageBox(this, "Question Inserted!!");
                 this.bindrepeater();
             }
-            if(e.CommandName == "remove")
+            if (e.CommandName == "remove")
             {
                 SqlCommand cmd = sqlconn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
@@ -149,9 +152,20 @@ namespace Quiz_Project
                 this.bindrepeater();
             }
         }
+        protected void insertRow(object sender,EventArgs e)
+        {
+            SqlConnection sqlconn = new SqlConnection(mainconn);
+            sqlconn.Open();
+            SqlCommand cmd = sqlconn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "insert into exam (question, op1,op2,op3,op4,correct) values ('question','op1','op2','op3','op4','correct answer')";
+            cmd.ExecuteNonQuery();
+            sqlconn.Close();
+            MessageBox(this, "Question Inserted!!");
+            this.bindrepeater();
+        }
         protected void Repeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-
         }
     }
 }

@@ -1,19 +1,25 @@
 ﻿body {
-    background-color:beige !important;
-    font-size:20px !important;
+    background-color: beige !important;
+    font-size: 20px !important;
 }
 
-.main-box{
-    position:static;
-    display:inline-block;
-    margin-bottom:15px;
+.main-box {
+    position: static;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
-.positioning{
-    margin-left:50px;
+.positioning {
+    margin-left: 50px;
 }
 
-.middle{
-    width:20% !important;
-    text-align:center;
+.middle {
+    width: 20% !important;
+    text-align: center;
+}
+
+.topLeft {
+    position: relative;
+    top: 55px;
+    left: 100px;
 }

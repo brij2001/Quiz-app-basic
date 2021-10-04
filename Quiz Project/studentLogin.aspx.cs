@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web;
 
 namespace Quiz_Project
@@ -12,8 +9,8 @@ namespace Quiz_Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
             string mainconn = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
@@ -37,11 +34,9 @@ namespace Quiz_Project
             else
             {
                 Label4.Text = "UserId & Password Is not correct Try again..!!";
-
             }
             Label4.Visible = true;
             sqlconn.Close();
         }
-
     }
 }

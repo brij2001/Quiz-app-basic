@@ -2,9 +2,10 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web;
+
 namespace Quiz_Project
 {
     public partial class exam : System.Web.UI.Page
@@ -12,7 +13,7 @@ namespace Quiz_Project
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {               
+            {
                 string mainconn = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(mainconn);
                 string sqlquery = "select * from exam";
@@ -24,7 +25,6 @@ namespace Quiz_Project
                 Repeater1.DataSource = dt;
                 Repeater1.DataBind();
                 sqlconn.Close();
-
             }
         }
 
@@ -117,7 +117,6 @@ namespace Quiz_Project
                         Label wrong = (Label)ri.FindControl("UserAns");
                         wrong.Text = "The answer is <b>" + rb4.Text.ToString() + "</b> is WRONG!!";
                         wrong.ForeColor = System.Drawing.Color.Red;
-
                     }
                 }
             }
@@ -128,7 +127,7 @@ namespace Quiz_Project
             string query = "UPDATE studentLogin set score=@score where UserId=@usr";
             SqlCommand cmd = new SqlCommand(query, sqlconn);
             cmd.Parameters.AddWithValue("@score", score);
-            cmd.Parameters.AddWithValue("@usr", usr);            
+            cmd.Parameters.AddWithValue("@usr", usr);
             System.Diagnostics.Debug.WriteLine(query);
             sqlconn.Open();
             cmd.ExecuteNonQuery();
@@ -136,9 +135,5 @@ namespace Quiz_Project
             Label1.Visible = true;
             Label1.Text = "Your score is " + score + ".";
         }
-
     }
-
- 
 }
-
